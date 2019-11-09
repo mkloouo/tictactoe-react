@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ae9e46c0-2e0d-4810-adfd-833f07cbdaf0" name="Default Changelist" comment="">
+    <list default="true" id="ae9e46c0-2e0d-4810-adfd-833f07cbdaf0" name="Default Changelist" comment="Add sort toggle button">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
     </list>
@@ -98,7 +98,7 @@
       <updated>1573318091592</updated>
       <workItem from="1573318092703" duration="616000" />
       <workItem from="1573318729553" duration="7290000" />
-      <workItem from="1573326410817" duration="2555000" />
+      <workItem from="1573326410817" duration="4294000" />
     </task>
     <task id="LOCAL-00001" summary="Add column, row in history list">
       <created>1573326769010</created>
@@ -121,7 +121,14 @@
       <option name="project" value="LOCAL" />
       <updated>1573327575851</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add sort toggle button">
+      <created>1573329016879</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1573329016879</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -145,7 +152,8 @@
     <MESSAGE value="Add column, row in history list" />
     <MESSAGE value="Bold current selected step in history" />
     <MESSAGE value="Rewrite board render in two loops" />
-    <option name="LAST_COMMIT_MESSAGE" value="Rewrite board render in two loops" />
+    <MESSAGE value="Add sort toggle button" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add sort toggle button" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
