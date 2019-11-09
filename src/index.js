@@ -5,6 +5,11 @@ import './index.css';
 
 function Square(props) {
     let style;
+
+    if (props.isSelected()) {
+        style = {background: 'gray', color: 'white'};
+    }
+
     if (props.isWinner()) {
         style = {backgroundColor: 'black', color: 'white'};
     }
@@ -27,6 +32,7 @@ class Board extends React.Component {
             value={this.props.squares[i]}
             onClick={() => this.props.onClick(i)}
             isWinner={() => this.props.isWinner(i)}
+            isSelected={() => this.props.isSelected(i)}
         />;
     }
 
@@ -54,7 +60,58 @@ class Game extends React.Component {
                 step: 0
             }],
             xIsNext: true,
-            currentStep: 0
+            currentStep: 0,
+            kbdNavigationHandlers: {
+                ArrowLeft: () => {
+                    if (this.state.kbdNavigation &&
+                        this.state.kbdNavigation.col > 0) {
+                        this.setState({
+                            kbdNavigation: {
+                                col: this.state.kbdNavigation.col - 1,
+                                row: this.state.kbdNavigation.row
+                            }
+                        })
+                    }
+                },
+                ArrowRight: () => {
+                    if (this.state.kbdNavigation &&
+                        this.state.kbdNavigation.col < 2) {
+                        this.setState({
+                            kbdNavigation: {
+                                col: this.state.kbdNavigation.col + 1,
+                                row: this.state.kbdNavigation.row
+                            }
+                        })
+                    }
+                },
+                ArrowUp: () => {
+                    if (this.state.kbdNavigation &&
+                        this.state.kbdNavigation.row > 0) {
+                        this.setState({
+                            kbdNavigation: {
+                                col: this.state.kbdNavigation.col,
+                                row: this.state.kbdNavigation.row - 1
+                            }
+                        })
+                    }
+                },
+                ArrowDown: () => {
+                    if (this.state.kbdNavigation &&
+                        this.state.kbdNavigation.row < 2) {
+                        this.setState({
+                            kbdNavigation: {
+                                col: this.state.kbdNavigation.col,
+                                row: this.state.kbdNavigation.row + 1
+                            }
+                        })
+                    }
+                },
+                Enter: () => {
+                    if (this.state.kbdNavigation) {
+                        this.handleClick(this.state.kbdNavigation.row * 3 + this.state.kbdNavigation.col);
+                    }
+                },
+            }
         };
     }
 
@@ -80,6 +137,14 @@ class Game extends React.Component {
             xIsNext: !this.state.xIsNext,
             currentStep: this.state.currentStep + 1
         });
+    }
+
+    handleKeyDown(event) {
+        if (!this.state.kbdNavigation) {
+            this.setState({kbdNavigation: {col: 0, row: 0}});
+        } else if (this.state.kbdNavigationHandlers[event.key]) {
+            this.state.kbdNavigationHandlers[event.key]();
+        }
     }
 
     jumpTo(step) {
@@ -120,6 +185,14 @@ class Game extends React.Component {
         });
     }
 
+    componentDidMount() {
+        document.addEventListener('keydown', this.handleKeyDown.bind(this), false);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener('keydown', this.handleKeyDown.bind(this), false);
+    }
+
     render() {
         const history = this.state.history;
         const current = history[this.state.currentStep];
@@ -144,6 +217,10 @@ class Game extends React.Component {
                         squares={current.squares}
                         onClick={(i) => this.handleClick(i)}
                         isWinner={(i) => winner && winner.indexOf(i) !== -1}
+                        isSelected={(i) => {
+                            return this.state.kbdNavigation &&
+                                this.state.kbdNavigation.row * 3 + this.state.kbdNavigation.col === i;
+                        }}
                     />
                 </div>
                 <div className="game-info">
